@@ -92,7 +92,12 @@ if __name__ == '__main__':
                     print("  - Added {} new posts!".format(post_counter))
 
         except KeyboardInterrupt as e:
+            # terminate on Ctrl+C
             raise e
         except:
+            # shift BOARD_LIST to begin with next board, not from beginning
+            ind = BOARD_LIST.index(board_name) + 1
+            BOARD_LIST = BOARD_LIST[ind:] + BOARD_LIST[:ind]
             er_count += 1
+            print("\033[31m[ITERATION {}]\033[37m An error occured. New BOARD_LIST: {}".format(it_count, BOARD_LIST))
             continue
